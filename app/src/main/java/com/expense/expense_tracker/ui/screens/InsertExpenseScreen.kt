@@ -3,6 +3,7 @@ package com.expense.expense_tracker.ui.screens
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -36,6 +38,8 @@ import com.expense.expense_tracker.ui.views.accounts.AccountView
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InsertExpenseScreen(navController: NavHostController) {
+    var amount by remember { mutableStateOf("") }
+    var selectedCategory by remember { mutableStateOf("") }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -51,9 +55,14 @@ fun InsertExpenseScreen(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues),
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.background
         ) {
-            InsertExpenseForm { accountId, amount, categoryId, categoryName, description ->
+            InsertExpenseForm(
+                amount = amount,
+                onAmountChange = { amount = it },
+                selectedCategory = selectedCategory,
+                onCategorySelected = { selectedCategory = it }
+            ) { accountId, amount, categoryId, categoryName, description ->
                 Log.d("Form", "AccountId: $accountId, Amount: $amount, Category: $categoryName, Desc: $description")
             }
 
@@ -64,6 +73,10 @@ fun InsertExpenseScreen(navController: NavHostController) {
 
 @Composable
 fun InsertExpenseForm(
+    amount: String,
+    onAmountChange: (String) -> Unit,
+    selectedCategory: String,
+    onCategorySelected: (String) -> Unit,
     onSubmit: (accountId: Int, amount: Int, categoryId: Int, categoryName: String, description: String) -> Unit
 ) {
     var accountId by remember { mutableStateOf("") }
@@ -77,23 +90,20 @@ fun InsertExpenseForm(
         .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
+        val categories = listOf("Food", "Entertainment", "Investment")
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.padding(bottom = 16.dp)
+        ) {
+            categories.forEach { category ->
+                FilterChip(
+                    selected = selectedCategory == category,
+                    onClick = { onCategorySelected(category) },
+                    label = { Text(category) }
+                )
+            }
+        }
 
-        OutlinedTextField(
-            value = accountId,
-            onValueChange = { accountId = it },
-            label = { Text("Account ID") },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                unfocusedBorderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
-                focusedLabelColor = MaterialTheme.colorScheme.onSurface,
-                unfocusedLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-                cursorColor = MaterialTheme.colorScheme.onSurface,
-                focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-            )
-        )
 
         OutlinedTextField(
             value = amount,

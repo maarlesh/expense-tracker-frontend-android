@@ -11,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.expense.expense_tracker.domain.model.Account
 
@@ -22,23 +23,34 @@ fun AccountView(modifier: Modifier = Modifier) {
         Account("ICICI", 500.75, "user456")
     )
 
-    LazyColumn(modifier = modifier) {
-        items(accounts) { account ->
-            AccountCard(account)
+    Column(modifier = modifier.padding(8.dp)) {
+        Text(
+            text = "Accounts",
+            style = MaterialTheme.typography.titleLarge,
+            color = Color.Black
+        )
+
+        LazyColumn {
+            items(accounts) { account ->
+                AccountCard(account)
+            }
         }
     }
 }
 
 
-
 @Composable
 fun AccountCard(account: Account) {
     Card(
-        modifier = Modifier.fillMaxWidth()
-            .padding(8.dp),
+        modifier = Modifier
+            .padding(vertical = 8.dp)
+            .fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondary,
             contentColor = MaterialTheme.colorScheme.onSurface
+        ),
+        elevation = CardDefaults.cardElevation(
+            8.dp
         )
     ) {
         Column(

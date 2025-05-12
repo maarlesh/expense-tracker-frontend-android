@@ -26,13 +26,17 @@ val LatoRegular = FontFamily(
     Font(R.font.lato_regular)
 )
 
+val Inter = FontFamily(
+    Font(R.font.inter)
+)
+
 val Typography = Typography(
     titleLarge = TextStyle(
-        fontFamily = LatoBlack,
+        fontFamily = Inter,
         fontSize = 24.sp
     ),
     titleMedium = TextStyle(
-        fontFamily = LatoRegular,
+        fontFamily = Inter,
         fontSize = 18.sp
     )
 )

@@ -44,7 +44,7 @@ fun HomeScreen(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues),
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.background
         ) {
             AccountView(modifier = Modifier.padding(16.dp))
         }
