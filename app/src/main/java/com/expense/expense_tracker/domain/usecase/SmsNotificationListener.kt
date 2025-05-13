@@ -1,4 +1,4 @@
-package com.expense.expense_tracker.service
+package com.expense.expense_tracker.domain.usecase
 
 import android.app.Notification
 import android.service.notification.NotificationListenerService

@@ -1,4 +1,4 @@
-package com.expense.expense_tracker.ui.theme
+package com.expense.expense_tracker.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

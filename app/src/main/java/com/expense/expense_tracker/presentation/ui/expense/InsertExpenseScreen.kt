@@ -1,4 +1,4 @@
-package com.expense.expense_tracker.ui.screens
+package com.expense.expense_tracker.presentation.ui.expense
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
@@ -33,7 +33,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.expense.expense_tracker.ui.views.accounts.AccountView
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -1,4 +1,4 @@
-package com.expense.expense_tracker.ui.views.accounts
+package com.expense.expense_tracker.presentation.ui.home.account
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +10,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -17,12 +18,7 @@ import com.expense.expense_tracker.domain.model.Account
 
 
 @Composable
-fun AccountView(modifier: Modifier = Modifier) {
-    val accounts: List<Account> = listOf(
-        Account("HDFC", 100000.50, "user123"),
-        Account("ICICI", 500.75, "user456")
-    )
-
+fun AccountScreen(modifier: Modifier = Modifier, accounts : List<Account>) {
     Column(modifier = modifier.padding(8.dp)) {
         Text(
             text = "Accounts",

@@ -1,5 +1,6 @@
-package com.expense.expense_tracker.ui.screens
+package com.expense.expense_tracker.presentation.ui.home
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -14,11 +15,21 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.expense.expense_tracker.ui.views.accounts.AccountView
+import com.expense.expense_tracker.data.remote.ApiService
+import com.expense.expense_tracker.data.remote.RetrofitClient
+import com.expense.expense_tracker.data.repositoryImpl.AccountRepositoryImpl
+import com.expense.expense_tracker.domain.usecase.GetAccountsUsecase
+import com.expense.expense_tracker.presentation.ui.home.account.AccountScreen
+import com.expense.expense_tracker.presentation.ui.home.account.AccountViewModel
+import com.expense.expense_tracker.presentation.ui.home.account.AccountViewModelFactory
 
+@SuppressLint("ViewModelConstructorInComposable")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController) {
@@ -46,7 +57,21 @@ fun HomeScreen(navController: NavHostController) {
                 .padding(paddingValues),
             color = MaterialTheme.colorScheme.background
         ) {
-            AccountView(modifier = Modifier.padding(16.dp))
+            val apiService = RetrofitClient.apiService
+            val accountRepository = AccountRepositoryImpl(apiService)
+            val getAccountsUseCase = GetAccountsUsecase(accountRepository)
+
+            val accountViewModel: AccountViewModel = viewModel(
+                factory = AccountViewModelFactory(getAccountsUseCase)
+            )
+
+            // Observe data from ViewModel
+            val accounts by accountViewModel.accounts.collectAsState()
+
+            // Pass data to AccountScreen
+            AccountScreen(modifier = Modifier.padding(16.dp), accounts = accounts)
+
+            AccountScreen(modifier = Modifier.padding(16.dp), accounts = accounts)
         }
     }
 }

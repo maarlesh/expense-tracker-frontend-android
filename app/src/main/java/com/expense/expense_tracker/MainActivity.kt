@@ -6,9 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.*
-import com.expense.expense_tracker.ui.screens.HomeScreen
-import com.expense.expense_tracker.ui.screens.InsertExpenseScreen
-import com.expense.expense_tracker.ui.theme.ExpensetrackerTheme
+import com.expense.expense_tracker.presentation.ui.home.HomeScreen
+import com.expense.expense_tracker.presentation.ui.expense.InsertExpenseScreen
+import com.expense.expense_tracker.presentation.theme.ExpensetrackerTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
