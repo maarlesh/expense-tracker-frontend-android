@@ -38,5 +38,9 @@ val Typography = Typography(
     titleMedium = TextStyle(
         fontFamily = Inter,
         fontSize = 18.sp
+    ),
+    titleSmall = TextStyle(
+        fontFamily = Inter,
+        fontSize = 16.sp
     )
 )

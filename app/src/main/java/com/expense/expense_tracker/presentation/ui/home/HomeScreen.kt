@@ -71,7 +71,6 @@ fun HomeScreen(navController: NavHostController) {
             // Pass data to AccountScreen
             AccountScreen(modifier = Modifier.padding(16.dp), accounts = accounts)
 
-            AccountScreen(modifier = Modifier.padding(16.dp), accounts = accounts)
         }
     }
 }

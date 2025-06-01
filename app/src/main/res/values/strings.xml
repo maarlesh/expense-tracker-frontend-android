@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">expense-tracker</string>
+    <string name="com_auth0_client_id">7JIYyjKrV4ndhNpNRRFRi1iWtpoVlX9R</string>
+    <string name="com_auth0_domain">dev-c5lpm185rndzs0sg.us.auth0.com</string>
 </resources>

@@ -14,7 +14,6 @@ class AccountViewModel(private val getAccountsUseCase: GetAccountsUsecase) : Vie
     val accounts: StateFlow<List<Account>> = _accounts
 
     init {
-        // Fetch accounts when ViewModel is initialized
         fetchAccounts()
     }
 

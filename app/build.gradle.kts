@@ -15,6 +15,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders.apply {
+            put("auth0Domain", if (project.hasProperty("auth0Domain")) project.property("auth0Domain") as String else "")
+            put("auth0Scheme", if (project.hasProperty("auth0Scheme")) project.property("auth0Scheme") as String else "")
+        }
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -69,5 +73,5 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-
+    implementation(libs.auth0)
 }

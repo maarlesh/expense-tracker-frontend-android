@@ -1,6 +1,7 @@
 package com.expense.expense_tracker.data.remote
 import com.expense.expense_tracker.domain.model.Account
 import com.expense.expense_tracker.domain.model.Category
+import com.expense.expense_tracker.domain.model.User
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.HTTP
@@ -14,4 +15,7 @@ interface ApiService {
 
     @GET("/api/account")
     suspend fun getAccounts(@Query("userId") userId: String): List<Account>
+
+    @GET("/api/user/login")
+    suspend fun loginUser(@Query("userName") userId: String, @Query("password") password: String) : User
 }
